@@ -1,10 +1,20 @@
 class RoutinesController < ApplicationController
   before_action :set_routine, only: [:show, :update, :destroy]
+  before_action :set_current_user
 
   # GET /routines
   # GET /routines.json
   def index
-    @routines = Routine.all
+    @user = User.find(params[:user_id])
+    if @user
+      if @user.id == @current_user.id
+        @routines = @user.routines
+      else
+        @routines = []
+      end
+    else
+      @routines = Routine.all
+    end
 
     render json: @routines
   end

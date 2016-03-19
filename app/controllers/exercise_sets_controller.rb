@@ -1,10 +1,17 @@
 class ExerciseSetsController < ApplicationController
   before_action :set_exercise_set, only: [:show, :update, :destroy]
+  before_filter :authenticate_user_from_token, only: [:index, :show, :create, :update, :destroy]
 
   # GET /exercise_sets
   # GET /exercise_sets.json
   def index
-    @exercise_sets = ExerciseSet.all
+    @user = User.find_by id: params[:user_id]
+    @routine_session = RoutineSession.find(params[:routine_session_id])
+    if @user && @routine_session
+      @exercise_sets = @routine_session.exercise_sets
+    else
+      @exercise_sets = []
+    end
 
     render json: @exercise_sets
   end

@@ -1,5 +1,6 @@
 class RoutineExercisesController < ApplicationController
   before_action :set_routine_exercise, only: [:show, :update, :destroy]
+  before_filter :set_current_user
 
   # GET /routine_exercises
   # GET /routine_exercises.json

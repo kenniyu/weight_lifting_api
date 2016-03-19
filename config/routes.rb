@@ -4,9 +4,31 @@ Rails.application.routes.draw do
   resources :routine_exercises, except: [:new, :edit]
   resources :exercises, except: [:new, :edit]
   resources :routines, except: [:new, :edit]
-  resources :users, except: [:new, :edit]
+
+  resources :users, except: [:new, :edit] do
+    resources :routines, except: [:new, :edit] do
+      resources :exercises, except: [:new, :edit]
+    end
+
+    resources :routine_sessions, except: [:new, :edit] do
+      resources :exercise_sets, except: [:new, :edit]
+    end
+  end
+
+  get :token, controller: 'application'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+
+  # =begin
+  # A user has many
+  #   routines, each of which has many
+  #     exercises, each of which has many
+  #   sessions, which has one
+  #     routine, which has many
+  #       exercises, each of which has many
+  #         exercise sets
+  # =end
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

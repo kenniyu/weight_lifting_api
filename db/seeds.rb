@@ -44,7 +44,6 @@ re12  = RoutineExercise.create(routine: routine6, exercise: exercise9)
 # routine sessions
 rs1 = RoutineSession.create(routine: routine1, completed: true)
 rs2 = RoutineSession.create(routine: routine2, completed: false)
-rs3 = RoutineSession.create(routine: routine3, completed: false)
 
 # exercise sets
 es1 = ExerciseSet.create(exercise: exercise1, routine_session: rs1, weight: 100.0, reps: 7)
@@ -58,8 +57,3 @@ es7 = ExerciseSet.create(exercise: exercise3, routine_session: rs2, weight: 50.0
 es8 = ExerciseSet.create(exercise: exercise3, routine_session: rs2, weight: 50.0, reps: 5)
 es9 = ExerciseSet.create(exercise: exercise3, routine_session: rs2, weight: 50.0, reps: 5)
 es10 = ExerciseSet.create(exercise: exercise4, routine_session: rs2, weight: 20.0, reps: 9)
-
-es11 = ExerciseSet.create(exercise: exercise1, routine_session: rs3, weight: 40.0, reps: 7)
-es12 = ExerciseSet.create(exercise: exercise1, routine_session: rs3, weight: 40.0, reps: 5)
-es13 = ExerciseSet.create(exercise: exercise1, routine_session: rs3, weight: 40.0, reps: 5)
-es14 = ExerciseSet.create(exercise: exercise5, routine_session: rs3, weight: 10.0, reps: 10)

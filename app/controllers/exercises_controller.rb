@@ -1,10 +1,24 @@
 class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :update, :destroy]
+  # before_filter :authenticate_user_from_token, only: [:index, :show, :create, :update, :destroy]
+  before_filter :set_current_user
 
   # GET /exercises
   # GET /exercises.json
   def index
-    @exercises = Exercise.all
+    @user = User.find_by id: params[:user_id]
+    @routine = Routine.find_by id: params[:routine_id]
+    if @user && @routine
+      puts "Got user and routine"
+      # someone wanted to access this user's routine
+      if @user.id == @current_user.id
+        @exercises = @routine.exercises
+      else
+        @exercises = []
+      end
+    else
+      @exercises = Exercise.all
+    end
 
     render json: @exercises
   end

@@ -1,10 +1,21 @@
 class RoutineSessionsController < ApplicationController
   before_action :set_routine_session, only: [:show, :update, :destroy]
+  before_action :set_current_user
 
   # GET /routine_sessions
   # GET /routine_sessions.json
   def index
-    @routine_sessions = RoutineSession.all
+    @user = User.find_by id: params[:user_id]
+    if @user
+      if @user.id == @current_user.id
+        @routines = @user.routines
+        @routine_sessions = RoutineSession.where(routine_id: @routines.map(&:id)).order("created_at desc")
+      else
+        @routine_sessions = []
+      end
+    else
+      @routine_sessions = []
+    end
 
     render json: @routine_sessions
   end
