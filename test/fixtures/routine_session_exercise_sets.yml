@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  routine_session_id: 
+  exercise_id: 
+  weight: 9.99
+  reps: 1
+
+two:
+  routine_session_id: 
+  exercise_id: 
+  weight: 9.99
+  reps: 1

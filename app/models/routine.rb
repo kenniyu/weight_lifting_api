@@ -6,4 +6,7 @@ class Routine < ActiveRecord::Base
   has_many :routine_sessions
 
   has_many :exercises, through: :routine_exercises
+  has_many :routine_exercises
+  has_many :routine_exercise_sets
+
 end

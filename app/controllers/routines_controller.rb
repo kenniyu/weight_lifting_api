@@ -1,19 +1,16 @@
 class RoutinesController < ApplicationController
   before_action :set_routine, only: [:show, :update, :destroy]
-  before_action :set_current_user
+  before_filter :set_current_user
 
   # GET /routines
   # GET /routines.json
   def index
-    @user = User.find(params[:user_id])
-    if @user
-      if @user.id == @current_user.id
-        @routines = @user.routines
-      else
-        @routines = []
-      end
+    @user = User.find_by(id: params[:user_id])
+    if @user && @user.id == @current_user.id
+      @routines = @user.routines
     else
-      @routines = Routine.all
+      @routines = []
+      # @routines = Routine.all
     end
 
     render json: @routines
@@ -22,6 +19,14 @@ class RoutinesController < ApplicationController
   # GET /routines/1
   # GET /routines/1.json
   def show
+    @user = User.find_by(id: params[:user_id])
+    if @user && @user.id == @current_user.id
+      @routine = Routine.includes(:routine_exercise_sets).find_by(user: @user, id: params[:id])
+    else
+      @routine = nil
+      # @routines = Routine.all
+    end
+
     render json: @routine
   end
 

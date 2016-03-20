@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :routine_session_exercise_sets, except: [:new, :edit]
+  resources :routine_exercise_sets, except: [:new, :edit]
   resources :exercise_sets, except: [:new, :edit]
   resources :routine_sessions, except: [:new, :edit]
   resources :routine_exercises, except: [:new, :edit]
@@ -8,10 +10,11 @@ Rails.application.routes.draw do
   resources :users, except: [:new, :edit] do
     resources :routines, except: [:new, :edit] do
       resources :exercises, except: [:new, :edit]
+      resources :routine_exercise_sets, except: [:new, :edit]
     end
 
     resources :routine_sessions, except: [:new, :edit] do
-      resources :exercise_sets, except: [:new, :edit]
+      resources :routine_session_exercise_sets, except: [:new, :edit]
     end
   end
 

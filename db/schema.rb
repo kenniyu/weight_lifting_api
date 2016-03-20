@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316041930) do
+ActiveRecord::Schema.define(version: 20160320182340) do
 
   create_table "exercise_sets", force: :cascade do |t|
     t.integer  "exercise_id"
@@ -31,6 +31,18 @@ ActiveRecord::Schema.define(version: 20160316041930) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "routine_exercise_sets", force: :cascade do |t|
+    t.integer  "routine_id"
+    t.integer  "exercise_id"
+    t.decimal  "weight"
+    t.integer  "reps"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "routine_exercise_sets", ["exercise_id"], name: "index_routine_exercise_sets_on_exercise_id"
+  add_index "routine_exercise_sets", ["routine_id"], name: "index_routine_exercise_sets_on_routine_id"
+
   create_table "routine_exercises", force: :cascade do |t|
     t.integer  "routine_id"
     t.integer  "exercise_id"
@@ -40,6 +52,18 @@ ActiveRecord::Schema.define(version: 20160316041930) do
 
   add_index "routine_exercises", ["exercise_id"], name: "index_routine_exercises_on_exercise_id"
   add_index "routine_exercises", ["routine_id"], name: "index_routine_exercises_on_routine_id"
+
+  create_table "routine_session_exercise_sets", force: :cascade do |t|
+    t.integer  "routine_session_id"
+    t.integer  "exercise_id"
+    t.decimal  "weight"
+    t.integer  "reps"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "routine_session_exercise_sets", ["exercise_id"], name: "index_routine_session_exercise_sets_on_exercise_id"
+  add_index "routine_session_exercise_sets", ["routine_session_id"], name: "index_routine_session_exercise_sets_on_routine_session_id"
 
   create_table "routine_sessions", force: :cascade do |t|
     t.integer  "routine_id"
